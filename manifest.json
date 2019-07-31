@@ -1,0 +1,10 @@
+{
+  "name": "Send It dev",
+  "description": "Send puppy pics to my ladyface",
+  "version": "0.0.1",
+  "permissions": ["contextMenus"],
+  "background": {
+    "scripts": ["script.js"]
+  },
+  "manifest_version": 2
+}
