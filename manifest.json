@@ -1,7 +1,7 @@
 {
-  "name": "Send It dev",
+  "name": "Send It",
   "description": "Send puppy pics to my ladyface",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "permissions": ["contextMenus"],
   "background": {
     "scripts": ["script.js"]

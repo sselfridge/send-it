@@ -2,8 +2,10 @@ function reqSMS(info) {
   const url = info.srcUrl;
   console.log(`Image:${url}`);
 
-  fetch(`http://localhost:8080/api/squirrel/?key=&url=${url}`, {
-  // fetch(`http://www.mapper.bike/api/squirrel/?key=&url=${url}`, {
+  const AWS_API_ENPOINT = "";
+  const KEY = "";
+  
+  fetch(`${AWS_API_ENPOINT}?key=${KEY}&url=${url}`, {
     mode: "no-cors",
     headers: {
       "Access-Control-Allow-Origin": "*"
@@ -25,7 +27,7 @@ function reqSMS(info) {
 var contexts = ["image", "video"];
 for (var i = 0; i < contexts.length; i++) {
   var context = contexts[i];
-  var title = "Send Dev it!";
+  var title = "Send it!";
   var id = chrome.contextMenus.create({
     title: title,
     contexts: [context],
@@ -34,7 +36,7 @@ for (var i = 0; i < contexts.length; i++) {
   // console.log("'" + context + "' item:" + id);
 }
 
-// Below is the built in code from the example project.  
+// Below is the built in code from the example project.
 // Keeping it in for reference later if needed.
 
 // function genericOnClick(info, tab) {
