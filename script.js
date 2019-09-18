@@ -4,20 +4,20 @@ function reqSMS(info) {
 
   const AWS_API_ENPOINT = "";
   const KEY = "";
-  
+
   fetch(`${AWS_API_ENPOINT}?key=${KEY}&url=${url}`, {
     mode: "no-cors",
     headers: {
       "Access-Control-Allow-Origin": "*"
     }
   })
-    .then(function(response) {
-      console.log(response);
-      return response.json();
-    })
-    .then(function(myJson) {
-      console.log(JSON.stringify(myJson));
-    })
+    // .then(function(response) {
+    //   console.log(response);
+    //   return response.json();
+    // })
+    // .then(function(myJson) {
+    //   console.log(JSON.stringify(myJson));
+    // })
     .catch(err => {
       console.log(err);
     });
