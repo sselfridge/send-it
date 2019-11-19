@@ -1,7 +1,16 @@
-function reqSMS(info) {
+function sendImgURL(info) {
   const url = info.srcUrl;
   console.log(`Image:${url}`);
+  sendReq(url);
+}
 
+function sendPageURL(info){
+  const url = info.pageUrl
+  console.log(`Page:${url}`)
+  sendReq(url)
+}
+
+function sendReq(url){
   const AWS_API_ENPOINT = "";
   const KEY = "";
 
@@ -27,11 +36,17 @@ function reqSMS(info) {
 var contexts = ["image", "video"];
 for (var i = 0; i < contexts.length; i++) {
   var context = contexts[i];
-  var title = "Send it!";
+  var title = "Send Pic URL";
   var id = chrome.contextMenus.create({
     title: title,
     contexts: [context],
-    onclick: reqSMS
+    onclick: sendImgURL
+  });
+  var urlTitle = "Send Entire Page"
+  var URL = chrome.contextMenus.create({
+    title: urlTitle,
+    contexts: [context],
+    onclick: sendPageURL
   });
   // console.log("'" + context + "' item:" + id);
 }
