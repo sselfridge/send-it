@@ -36,20 +36,18 @@ function sendReq(url){
 var contexts = ["image", "video"];
 for (var i = 0; i < contexts.length; i++) {
   var context = contexts[i];
-  var title = "Send Pic URL";
   var id = chrome.contextMenus.create({
-    title: title,
+    title: "Send Pic URL",
     contexts: [context],
     onclick: sendImgURL
   });
-  var urlTitle = "Send Entire Page"
-  var URL = chrome.contextMenus.create({
-    title: urlTitle,
-    contexts: [context],
-    onclick: sendPageURL
-  });
   // console.log("'" + context + "' item:" + id);
 }
+var URL = chrome.contextMenus.create({
+  title: "Send Entire Page",
+  contexts: ["page"],
+  onclick: sendPageURL
+});
 
 // Below is the built in code from the example project.
 // Keeping it in for reference later if needed.
