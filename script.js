@@ -1,24 +1,77 @@
-function sendImgURL(info) {
+var contexts = ["image", "video"];
+for (var i = 0; i < contexts.length; i++) {
+  var context = contexts[i];
+  var id = chrome.contextMenus.create({
+    title: "Send Pic URL",
+    contexts: [context],
+    onclick: sendImgURL,
+  });
+  chrome.contextMenus.create({
+    title: "Send with Caption",
+    contexts: [context],
+    onclick: imgCaption,
+  });
+}
+chrome.contextMenus.create({
+  title: "Send Entire Page",
+  contexts: ["page"],
+  onclick: sendPageURL,
+});
+chrome.contextMenus.create({
+  title: "Send Page with Caption",
+  contexts: ["page"],
+  onclick: pageCaption,
+});
+
+//Obj is a un=needed parameter
+//passing through so that caption can be used by the standard functions
+function imgCaption(info, obj) {
+  const caption = prompt("Caption:");
+  console.log("Caption:", caption);
+
+  sendImgURL(info, obj, caption);
+}
+
+function pageCaption(info, obj) {
+  const caption = prompt("Caption:");
+  console.log("Caption:", caption);
+
+  sendPageURL(info, obj, caption);
+}
+
+function sendImgURL(info, obj, caption) {
   const url = info.srcUrl;
   console.log(`Image:${url}`);
-  sendReq(url);
+  sendReq(url, caption);
 }
 
-function sendPageURL(info){
-  const url = info.pageUrl
-  console.log(`Page:${url}`)
-  sendReq(url)
+function sendPageURL(info, obj, caption) {
+  const url = info.pageUrl;
+  console.log(`Page:${url}`);
+  sendReq(url, caption);
 }
 
-function sendReq(url){
+function sendReq(url, caption = "<3") {
+  console.log(`Url:${url}`);
+
+  console.log("caption");
+  console.log(caption);
+
+  if (caption === null) {
+    console.log("Null caption----ABORT!");
+    return;
+  }
+
   const AWS_API_ENPOINT = "";
   const KEY = "";
 
-  fetch(`${AWS_API_ENPOINT}?key=${KEY}&url=${url}`, {
+  const query = `${AWS_API_ENPOINT}?key=${KEY}&url=${url}&caption=${caption}`;
+
+  fetch(query, {
     mode: "no-cors",
     headers: {
-      "Access-Control-Allow-Origin": "*"
-    }
+      "Access-Control-Allow-Origin": "*",
+    },
   })
     // .then(function(response) {
     //   console.log(response);
@@ -27,27 +80,10 @@ function sendReq(url){
     // .then(function(myJson) {
     //   console.log(JSON.stringify(myJson));
     // })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 }
-
-// Create one test item for each context type.
-var contexts = ["image", "video"];
-for (var i = 0; i < contexts.length; i++) {
-  var context = contexts[i];
-  var id = chrome.contextMenus.create({
-    title: "Send Pic URL",
-    contexts: [context],
-    onclick: sendImgURL
-  });
-  // console.log("'" + context + "' item:" + id);
-}
-var URL = chrome.contextMenus.create({
-  title: "Send Entire Page",
-  contexts: ["page"],
-  onclick: sendPageURL
-});
 
 // Below is the built in code from the example project.
 // Keeping it in for reference later if needed.
