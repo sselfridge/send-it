@@ -58,12 +58,12 @@ function sendReq(url, caption = "<3") {
   console.log(caption);
 
   if (caption === null) {
-    console.log("Null caption----ABORT!");
+    console.log("Null caption ---- ABORT!");
     return;
   }
 
   const AWS_API_ENPOINT = "";
-  const KEY = "";
+  const KEY = ""; 
 
   const query = `${AWS_API_ENPOINT}?key=${KEY}&url=${url}&caption=${caption}`;
 
