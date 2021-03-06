@@ -26,10 +26,13 @@ chrome.contextMenus.create({
 //Obj is a un=needed parameter
 //passing through so that caption can be used by the standard functions
 function imgCaption(info, obj) {
-  const caption = prompt("Caption:");
-  console.log("Caption:", caption);
+  chrome.storage.sync.get(["title"], function ({ title }) {
+    console.log("result: ", title);
+    const caption = prompt("Caption:", title);
+    console.log("Caption:", caption);
 
-  sendImgURL(info, obj, caption);
+    sendImgURL(info, obj, caption);
+  });
 }
 
 function pageCaption(info, obj) {
@@ -63,7 +66,7 @@ function sendReq(url, caption = "<3") {
   }
 
   const AWS_API_ENPOINT = "";
-  const KEY = ""; 
+  const KEY = "";
 
   const query = `${AWS_API_ENPOINT}?key=${KEY}&url=${url}&caption=${caption}`;
 
