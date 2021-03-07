@@ -26,11 +26,8 @@ chrome.contextMenus.create({
 //get title from content:
 const getTitle = (info, obj, sendFunc) => {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { action: "open_dialog_box" }, function (title) {
-      console.log("send message title: ", title);
+    chrome.tabs.sendMessage(tabs[0].id, {}, function (title) {
       const caption = prompt("Caption:", title);
-      console.log("Caption:", caption);
-
       sendFunc(info, obj, caption);
     });
   });
@@ -88,7 +85,7 @@ function sendReq(url, caption = "<3") {
     //   console.log(JSON.stringify(myJson));
     // })
     .catch((err) => {
-      console.log(err);
+      console.log("request error:", err);
     });
 }
 
