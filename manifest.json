@@ -2,7 +2,7 @@
   "name": "Send It",
   "description": "Send puppy pics to my ladyface",
   "version": "0.0.7",
-  "permissions": ["storage", "contextMenus"],
+  "permissions": ["storage", "contextMenus", "tabs"],
   "background": {
     "scripts": ["script.js"]
   },

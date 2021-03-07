@@ -23,23 +23,27 @@ chrome.contextMenus.create({
   onclick: pageCaption,
 });
 
+//get title from content:
+const getTitle = (info, obj, sendFunc) => {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { action: "open_dialog_box" }, function (title) {
+      console.log("send message title: ", title);
+      const caption = prompt("Caption:", title);
+      console.log("Caption:", caption);
+
+      sendFunc(info, obj, caption);
+    });
+  });
+};
+
 //Obj is a un=needed parameter
 //passing through so that caption can be used by the standard functions
 function imgCaption(info, obj) {
-  chrome.storage.sync.get(["title"], function ({ title }) {
-    console.log("result: ", title);
-    const caption = prompt("Caption:", title);
-    console.log("Caption:", caption);
-
-    sendImgURL(info, obj, caption);
-  });
+  getTitle(info, obj, sendImgURL);
 }
 
 function pageCaption(info, obj) {
-  const caption = prompt("Caption:");
-  console.log("Caption:", caption);
-
-  sendPageURL(info, obj, caption);
+  getTitle(info, obj, sendPageURL);
 }
 
 function sendImgURL(info, obj, caption) {
