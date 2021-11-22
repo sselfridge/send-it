@@ -1,9 +1,9 @@
-# sent-it
-Very basic chrome extension to see pupper pics to my gf
+# send-it
+Very basic chrome extension to see pupper pics to my ~~gf~~ wife
 
 
-A lambda would probably be better for this, but I was able to cook this up in an hour or so this morning and I'm happy with it for now.
+![image](https://user-images.githubusercontent.com/44272343/142788102-36863182-9580-4788-b298-f0585b61614f.png)
 
-v 0.0.5 - added caption ability
+How to:
 
-v 0.0.6 - merged caption with send full page, added caption bailout
+https://dev.to/sirclesam/sms-puppy-pics-to-ladyface-with-lambda-walkthrough-181m
