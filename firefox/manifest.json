@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "name": "Send It",
-  "description": "Add a context menu option to links to copy the link to the clipboard, as plain text and as a link in rich HTML.",
-  "version": "1.0",
-  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/context-menu-copy-link-with-types",
+  "description": "Send pupper pics to my wife",
+  "version": "1.2",
+  "homepage_url": "https://github.com/sselfridge/send-it",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

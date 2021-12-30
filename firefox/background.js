@@ -61,8 +61,8 @@ function sendReq(url, caption = "<3") {
     return;
   }
 
-  const AWS_API_ENDPOINT = "";
-  const KEY = "";
+  const AWS_API_ENDPOINT ;
+  const KEY ;
 
   const query = `${AWS_API_ENDPOINT}?key=${KEY}&url=${url}&caption=${caption}`;
 

@@ -12,6 +12,7 @@ function getPlaceholder() {
   const URL = window.location.hostname;
   console.info("URL: ", URL);
 
+  //only have placeholder for imgur titles
   if (!URL.includes("imgur")) return "<3";
   let placeholder = "";
   const titleSelectors = [".Gallery-Title > div.row > span", "h1.post-title"];
