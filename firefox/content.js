@@ -1,16 +1,19 @@
 window.onload = () => {
-  browser.runtime.onMessage.addListener(() => {
+  console.info("Loaded");
+  browser.runtime.onMessage.addListener((msg) => {
+    console.info("Message Received", msg);
     const placeholder = getPlaceholder();
 
     const caption = prompt("", placeholder);
 
     return Promise.resolve({ caption });
   });
+  console.info("Registered");
 };
 
 function getPlaceholder() {
+  console.info("getPlaceholder:");
   const URL = window.location.hostname;
-  console.info("URL: ", URL);
 
   //only have placeholder for imgur titles
   if (!URL.includes("imgur")) return "<3";
@@ -24,5 +27,6 @@ function getPlaceholder() {
     } catch (error) {}
     if (i > 2) break;
   }
+  console.info("returning placeholder: ", placeholder);
   return placeholder;
 }

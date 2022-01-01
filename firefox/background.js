@@ -1,23 +1,23 @@
-browser.contextMenus.create({
-  id: "page",
-  title: "Send page",
-  contexts: ["page"],
-});
+// browser.contextMenus.create({
+//   id: "page",
+//   title: "Send page",
+//   contexts: ["page"],
+// });
 
-browser.contextMenus.create({
-  id: "pageCaption",
-  title: "Send Page with caption",
-  contexts: ["page"],
-});
+// browser.contextMenus.create({
+//   id: "pageCaption",
+//   title: "Send Page with caption",
+//   contexts: ["page"],
+// });
 
-browser.contextMenus.create({
-  id: "img",
-  title: "Send img URL",
-  contexts: ["image", "video"],
-});
+// browser.contextMenus.create({
+//   id: "img",
+//   title: "Send 1.2 img URL",
+//   contexts: ["image", "video"],
+// });
 browser.contextMenus.create({
   id: "imgCaption",
-  title: "Send with Caption",
+  title: `Send with Caption `,
   contexts: ["image", "video"],
 });
 
@@ -35,11 +35,15 @@ function handleError(error) {
 }
 
 function sendMessage(tabId) {
-  const sending = browser.tabs.sendMessage(tabId, {});
-  sending.then(handleResponse, handleError);
+  console.info("tabId: ", tabId);
+  browser.tabs
+    .sendMessage(tabId, { message: "hello" })
+    .then(handleResponse, handleError);
 }
 
 browser.contextMenus.onClicked.addListener((info, tab) => {
+  console.info("info: ", info);
+  console.info("tab: ", tab);
   const menuItemId = info.menuItemId;
 
   const isCaption = menuItemId.includes("Caption");
@@ -48,38 +52,39 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
   url = isPage ? info.pageUrl : info.srcUrl;
 
   if (isCaption) {
+    console.info("send message", tab.id);
     sendMessage(tab.id);
   } else {
+    console.info("Send req:", url);
     sendReq(url);
     url = null;
   }
 });
 
 function sendReq(url, caption = "<3") {
+  console.info("sendReq: ", caption, url);
   if (caption === null || url === null) {
     console.log("Null input ---- ABORT!");
     return;
   }
 
-  const AWS_API_ENDPOINT ;
-  const KEY ;
+  const AWS_API_ENDPOINT = "";
+  const KEY = "";
 
   const query = `${AWS_API_ENDPOINT}?key=${KEY}&url=${url}&caption=${caption}`;
-
+  console.info("query: ", query);
+  // return;
   fetch(query, {
     mode: "no-cors",
     headers: {
       "Access-Control-Allow-Origin": "*",
     },
   })
-    // .then(function(response) {
-    //   console.log(response);
-    //   return response.json();
-    // })
-    // .then(function(myJson) {
-    //   console.log(JSON.stringify(myJson));
-    // })
+    .then(() => console.info("Query Sent"))
+    // .then((data) => console.log(data))
     .catch((err) => {
       console.log("request error:", err);
     });
+
+  return;
 }
