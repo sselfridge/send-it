@@ -4,11 +4,11 @@
 //   contexts: ["page"],
 // });
 
-// browser.contextMenus.create({
-//   id: "pageCaption",
-//   title: "Send Page with caption",
-//   contexts: ["page"],
-// });
+browser.contextMenus.create({
+  id: "pageCaption",
+  title: "Send Page with caption",
+  contexts: ["page"],
+});
 
 // browser.contextMenus.create({
 //   id: "img",
