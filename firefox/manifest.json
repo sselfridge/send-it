@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Send It",
   "description": "Send pupper pics to mein wife.",
-  "version": "1.4",
+  "version": "1.5",
   "homepage_url": "https://github.com/sselfridge/send-it",
   "content_scripts": [
     {
